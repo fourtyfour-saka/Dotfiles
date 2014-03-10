@@ -1,7 +1,6 @@
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2011 Apr 15
+" Luke English's .vimrc
+" Maintainer:	Luke English <fourtyfour.saka@gmail.com>
+" Last change:  Mon 10/03/2014 
 "
 " To use it, copy it to
 "     for Unix and OS/2:  ~/.vimrc
@@ -17,6 +16,55 @@ endif
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
+
+" Fix swap errors
+set directory=.,$TEMP
+
+" Required for Vundle
+filetype off
+set rtp+=~/vimfiles/bundle/vundle/
+let path='~/vimfiles/bundle'
+call vundle#rc(path)
+
+" Let Vundle manage Vundle, required
+Bundle 'gmarik/vundle'
+
+" The following are examples of different formats supported.
+" Keep bundle commands between here and filetype plugin indent on
+Bundle 'tomasr/molokai'
+Bundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
+Bundle 'https://github.com/scrooloose/nerdtree.git'
+Bundle 'uguu-org/vim-matrix-screensaver'
+Bundle 'tpope/vim-characterize'
+"Bundle 'tpope/vim-fugitive'
+"Bundle 'Lokaltog/vim-easymotion'
+"Bundle 'tpope/vim-rails.git'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+"Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+" scripts from http://vim-scripts.org/vim/scripts.html
+"Bundle 'L9'
+"Bundle 'FuzzyFinder'
+" scripts not on GitHub
+"Bundle 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Bundle 'file:///path/to/plugin'
+" ... 
+
+filetype plugin indent on " required
+" To ignore plugin indent changes, instead use:
+" "filetype plugin on
+" "
+" " Brief help
+" " :BundleList          - list configured bundles
+" " :BundleInstall(!)    - install (update) bundles
+" " :BundleSearch(!) foo - search (or refresh cache first) for foo
+" " :BundleClean(!)      - confirm (or auto-approve) removal of unused bundles
+" "
+" " see :h vundle for more details or wiki for FAQ
+" " NOTE: comments after Bundle commands are not allowed.
+" " Put your stuff after this line
+
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -53,7 +101,7 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
   set is
   set guioptions-=T " no toolbar
-  colorscheme elflord
+  colorscheme molokai
 endif
 
 " Only do this part when compiled with support for autocommands.
@@ -113,4 +161,14 @@ imap <right> <nop>
 imap <up> <nop>
 imap <down> <nop>
 
+" Remove highlighting after done searching
+
+nmap <silent> <leader>h :let@/="" <cr>
+
+" Automatically rebuild .vimrc when we save
+
+augroup myvimrc
+	au!
+	au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC
+augroup END
 
