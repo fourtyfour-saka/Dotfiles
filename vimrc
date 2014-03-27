@@ -22,6 +22,9 @@ set directory=.,$TEMP
 
 " Required for Vundle
 filetype off
+filetype plugin indent off
+set rtp+=$GOROOT/misc/vim
+filetype plugin indent on
 set rtp+=~/vimfiles/bundle/vundle/
 let path='~/vimfiles/bundle'
 call vundle#rc(path)
@@ -48,8 +51,7 @@ Bundle 'tpope/vim-characterize'
 " scripts not on GitHub
 "Bundle 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
-"Bundle 'file:///path/to/plugin'
-" ... 
+"Bundle 'file:///$GOROOT\misc\vim'
 
 filetype plugin indent on " required
 " To ignore plugin indent changes, instead use:
@@ -88,6 +90,9 @@ map Q gq
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
+
+" set default directory
+cd ~\Documents
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
@@ -165,6 +170,11 @@ imap <down> <nop>
 
 nmap <silent> <leader>h :let@/="" <cr>
 
+" Other useful bindings
+nmap <F3> :NERDTree <cr>
+nmap <F4> :e $MYVIMRC <cr>
+nmap <F6> :BundleInstall <cr>
+
 " Automatically rebuild .vimrc when we save
 
 augroup myvimrc
@@ -172,3 +182,6 @@ augroup myvimrc
 	au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC
 augroup END
 
+" Automatically gofmt when save
+
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
