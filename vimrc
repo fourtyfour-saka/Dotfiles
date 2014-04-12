@@ -36,6 +36,8 @@ Bundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 Bundle 'https://github.com/scrooloose/nerdtree.git'
 Bundle 'uguu-org/vim-matrix-screensaver'
 Bundle 'tpope/vim-characterize'
+" Bundle 'VimIRC'
+Bundle 'Blackrush/vim-gocode'
 "Bundle 'tpope/vim-fugitive'
 "Bundle 'Lokaltog/vim-easymotion'
 "Bundle 'tpope/vim-rails.git'
@@ -100,6 +102,7 @@ if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
   set is
+  set guifont=Inconsolata:h11
   set guioptions-=T " no toolbar
   colorscheme molokai
 endif
@@ -172,3 +175,4 @@ augroup myvimrc
 	au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC
 augroup END
 
+cd E:\
